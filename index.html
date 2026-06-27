@@ -45,6 +45,13 @@
                 flex: 1;
                 min-width: 0;
             }
+            <div class="full-width-hero">
+    <img src="treeyoko.jpeg" alt="背景画像">
+</div>
+
+<section id="profile" class="bg-light-green py-5">
+    ...
+</section>
             /* PCの時はスマホ用のハンバーガーボタンと上部バーを隠す */
             .mobile-header-bar {
                 display: none;
@@ -158,6 +165,21 @@
         <main class="main-content-area">
 
             <!-- メインビジュアル -->
+             .full-width-hero {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+}
+
+.full-width-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* 必要に応じて高さを固定したい場合は以下を指定（例: 300px） */
+    /* max-height: 300px; */
+}
             <header class="py-5 bg-light-green position-relative overflow-hidden" style="border-radius: 0 0 50px 50px;">
                 <div class="container py-5">
                     <div class="row align-items-center">
