@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us 完全再現テスト</title>
+
+    <style>
+        /* 1. Google Fontsからおしゃれな手書きフォントを読み込む */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+        
+        /* 画面全体の基本設定 */
+        body {
+            background-color: #fcfbfa;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 50px;
+        }
+
+        /* 【完全再現】英語の見出し（About us） */
+        .about-title-en {
+            /* フォントを指定 */
+            font-family: 'Caveat', cursive !important; 
+            font-size: 5.5rem !important; /* 文字の大きさ */
+            font-weight: 700 !important;  /* 太字 */
+            margin: 0 !important;
+            padding: 0 !important;
+            display: inline-block !important;
+            line-height: 1.0 !important;
+            letter-spacing: 0.02em !important;
+
+            /* 👇【変更箇所】上から下への「鮮やかな黄色」〜「爽やかな黄緑色」のグラデーション */
+            background: linear-gradient(to bottom, #fff200 0%, #76ca15 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            
+            /* 【文字切れ対策】右側の余白を確保 */
+            padding-right: 0.2em !important; 
+            margin-right: -0.2em !important;  
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="about-title-en">Concept</h2>
+
+</body>
+</html>

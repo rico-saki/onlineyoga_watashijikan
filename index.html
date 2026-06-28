@@ -11,12 +11,74 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
     <style>
+        /* 💡 Caveatフォントを読み込み */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
         body { font-family: "Shippori Mincho", sans-serif; color: #333; background-color: #ffffff; }
         section { padding: 60px 0; border-bottom: 1px solid #eee; }
         .bg-light-green { background-color: #f4f7f4; }
         .btn-line { background-color: #06C755; color: white; font-weight: bold; }
         .btn-line:hover { background-color: #05b04b; color: white; }
         h1, h2, h3 { letter-spacing: 0.12em; }
+
+        /* 🎨 【変更・調整】画像の上に文字を重ねるためのコンテナ設定 */
+        .top-hero-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .top-full-img {
+            width: 100%;
+            height: 60vh; /* 画面の高さの60%分に設定（お好みで調整してください） */
+            min-height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 🎨 画像の上に重なる白文字のスタイル */
+        .hero-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            color: #ffffff !important;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); /* 写真の上でもくっきり見えるように影を調整 */
+            z-index: 10;
+            max-width: 80%;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .hero-lead {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* 🎨 英語見出し用のグラデーション＆手書きフォント設定 */
+        .gradient-heading-en {
+            font-family: 'Caveat', cursive !important; 
+            font-size: 5.5rem !important; 
+            font-weight: 700 !important;  
+            margin: 0 !important;
+            padding: 0 !important;
+            display: inline-block !important;
+            line-height: 1.0 !important;
+            letter-spacing: 0.02em !important;
+            background: linear-gradient(to bottom, #fff200 0%, #76ca15 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            padding-right: 0.2em !important; 
+            margin-right: -0.2em !important;  
+        }
 
         /* ================= 💡 ここからPC用のレイアウト ================= */
         @media (min-width: 992px) {
@@ -30,7 +92,7 @@
                 top: 0;
                 left: 0;
                 height: 100vh;
-                background-color: #fcfdfc;
+                background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important;
                 border-right: 1px solid #eaeaea;
                 padding: 50px 35px;
                 z-index: 1000;
@@ -69,31 +131,25 @@
                 justify-content: space-between;
                 align-items: center;
             }
+            /* スマホ時の文字サイズ微調整 */
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-lead {
+                font-size: 1rem;
+            }
+            .hero-text-overlay {
+                left: 5%;
+                max-width: 90%;
+            }
         }
 
-        /* 🌲 右側の一番上に横いっぱいに表示させる新しいデザイン設定（修正版） */
-        .full-width-hero {
-            width: 100%;
-            overflow: hidden;
-            background-color: #f4f7f4; /* 写真の背景と馴染む優しい薄緑色 */
-            text-align: center;
-        }
-        .full-width-hero img {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* contain にすることで、画像を切り取らず、画質を落とさずに全体を表示します */
-            object-fit: contain; 
-            /* パソコン大画面用に少し高さを広げました */
-            max-height: 600px; 
-        }
-
-        /* メナップ内リンクの見た目調整 */
+        /* メニュー内リンクの見た目調整 */
         .sidebar-nav .nav-link, .offcanvas-body .nav-link {
             color: #555555 !important;
             padding: 15px 0 !important;
             font-size: 1.05rem;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
             transition: color 0.3s, padding-left 0.3s;
         }
         .sidebar-nav .nav-link:hover, .offcanvas-body .nav-link:hover {
@@ -121,7 +177,7 @@
 <body>
 
     <div class="mobile-header-bar shadow-sm">
-        <a class="navbar-brand fw-bold" href="#" style="color: #2c4a3e; font-size: 1.2rem;">〇〇ヨーガ教室</a>
+        <a class="navbar-brand fw-bold" href="#" style="color: #2c4a3e; font-size: 1.2rem;">オンラインヨガ〇〇</a>
         <button class="hamburger-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
             <i class="bi bi-list"></i>
         </button>
@@ -131,7 +187,7 @@
 
         <aside class="sidebar-nav">
             <div class="mb-5">
-                <a class="navbar-brand fw-bold" href="#" style="font-size: 1.4rem; color: #2c4a3e; letter-spacing: 0.05em;">〇〇ヨーガ教室</a>
+                <a class="navbar-brand fw-bold" href="#" style="font-size: 1.4rem; color: #2c4a3e; letter-spacing: 0.05em;">オンラインヨガ〇〇</a>
             </div>
             <nav class="nav flex-column">
                 <a class="nav-link" href="#concept">初めての方へ</a>
@@ -162,34 +218,22 @@
 
         <main class="main-content-area">
 
-            <div class="full-width-hero">
-                <img src="images/treeyoko.jpeg" alt="背景画像">
+            <!-- 🛠️ 【変更箇所】メイン画像をコンテナで囲み、上に白文字テキストを配置 -->
+            <div class="top-hero-container">
+                <img src="images/pola.jpeg" alt="pola" class="top-full-img">
+                <div class="hero-text-overlay">
+                    <h1 class="hero-title">毎日がもっと楽しくなる大人のためのヨガ〇〇</h1>
+                    <p class="hero-lead">ため息を、ふっと深呼吸に変えて。<br>何歳からでも、気軽に心地よいヨガを始めてみませんか?</p>
+                </div>
             </div>
 
-            <header class="py-5 bg-light-green position-relative overflow-hidden" style="border-radius: 0 0 50px 50px;">
-                <div class="container py-5">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 text-start">
-                            <span class="badge bg-success mb-3 px-3 py-2 rounded-pill">オンラインヨガ</span>
-                            <h1 class="display-4 fw-bold lh-base" style="color: #2c4a3e;"><br>毎日がもっと楽しくなる<br>大人のためのヨガ教室</h1>
-                            <p class="lead mt-3 text-muted">ため息を、ふっと深呼吸に変えて。<br>何歳からでも、気軽に心地よいヨガを始めてみませんか?</p>
-                        </div>
-                        <div class="col-lg-6 text-center mt-5 mt-lg-0">
-                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" 
-                                 alt="ヨガのイメージ" 
-                                 class="img-fluid rounded-4 shadow" 
-                                 style="max-height: 400px; object-fit: cover;">
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <!-- 元の重なったデザインのヘッダーは削除し、直接Conceptセクションへ繋げました -->
 
             <section id="concept" class="container py-5">
-                <div class="row justify-content-center text-center mb-5">
+                <div class="row justify-content-center text-center mb-4">
                     <div class="col-md-8">
-                        <span class="text-success fw-bold" style="letter-spacing: 0.2em;">CONCEPT</span>
-                        <h2 class="fw-bold mt-2 mb-4" style="color: #2c4a3e; font-size: 2.2rem;">初めての方へ</h2>
-                        <p class="lead" style="line-height: 2;">
+                        <h2 class="gradient-heading-en">Concept</h2>
+                        <p class="lead mt-3" style="line-height: 2;">
                             「健康な体を維持したい」「日々の生活や仕事に少し疲れてしまっている」<br>
                             そんなあなたのための、無理なく続けられるオンラインヨガです。<br>
                             持病がある方や、体が硬くて動きにくいと感じている方も、安心してご参加ください。
@@ -232,8 +276,7 @@
                 <div class="container py-4">
                     <div class="row justify-content-center text-center mb-5">
                         <div class="col-md-8">
-                            <span class="text-success fw-bold" style="letter-spacing: 0.2em;">INSTRUCTOR</span>
-                            <h2 class="fw-bold mt-2" style="color: #2c4a3e; font-size: 2.2rem;">講師紹介</h2>
+                            <h2 class="gradient-heading-en">Instructor</h2>
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center">
@@ -252,7 +295,7 @@
                                 そのときに、自分の身体の心地よさを感じ、母にも教えたいと思い、本格的に勉強を開始。<br>
                                 家族や友人知人に教えながら、2022年にヨーガ教師の資格を取得。<br>
                                 2025年にヨーガ療法士の資格を取得し、もっとたくさんの人にヨガのよさ、楽しさを伝えたい、<br>
-                                心身ともに健康になっていく人を増やしたいと考えています。</p>
+                               心身ともに健康になっていく人を増やしたいと考えています。</p>
                             </div>
                         </div>
                     </div>
@@ -296,10 +339,9 @@
             <section id="price" class="container py-5">
                 <div class="row justify-content-center text-center">
                     <div class="col-md-8">
-                        <span class="text-success fw-bold" style="letter-spacing: 0.2em;">SCHEDULE & PRICE</span>
-                        <h2 class="fw-bold mt-2 mb-5" style="color: #2c4a3e; font-size: 2.2rem;">スケジュール・料金</h2>
+                        <h2 class="gradient-heading-en">Schedule & Price</h2>
                         
-                        <h3 class="h4 fw-bold mb-3" style="color: #2c4a3e;">
+                        <h3 class="h4 fw-bold mb-3 mt-5" style="color: #2c4a3e;">
                             <i class="bi bi-calendar-event-fill me-2 text-success"></i>レッスンスケジュール
                         </h3>
                         <p class="text-muted mb-4">毎週火曜日：13:30～14:45</p>
@@ -370,7 +412,7 @@
             </section>
 
             <footer class="text-center py-4 bg-dark text-white">
-                <p class="mb-0">&copy; 2026 ヨガ教室名. All Rights Reserved.</p>
+                <p class="mb-0">&copy; 2026 オンラインヨガ〇〇. All Rights Reserved.</p>
             </footer>
 
         </main>

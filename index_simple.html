@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoomオンラインヨガ教室（仮）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* 💡 Caveatフォントを読み込み */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+        body { font-family: "Shippori Mincho", sans-serif; color: #333; background-color: #ffffff; }
+        section { padding: 60px 0; border-bottom: 1px solid #eee; }
+        .bg-light-green { background-color: #f4f7f4; }
+        .btn-line { background-color: #06C755; color: white; font-weight: bold; }
+        .btn-line:hover { background-color: #05b04b; color: white; }
+        h1, h2, h3 { letter-spacing: 0.12em; }
+
+        /* 🎨 英語見出し用のグラデーション＆手書きフォント設定 */
+        .gradient-heading-en {
+            font-family: 'Caveat', cursive !important; 
+            font-size: 5.5rem !important; 
+            font-weight: 700 !important;  
+            margin: 0 !important;
+            padding: 0 !important;
+            display: inline-block !important;
+            line-height: 1.0 !important;
+            letter-spacing: 0.02em !important;
+            background: linear-gradient(to bottom, #fff200 0%, #76ca15 100%) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            padding-right: 0.2em !important; 
+            margin-right: -0.2em !important;  
+        }
+
+        /* 🎨 「オンラインヨガ」バッジ用のグラデーション設定 */
+        .badge-gradient {
+            display: inline-block;
+            /* 👇【変更箇所】「Concept」の見出しと同じ黄色〜黄緑色のグラデーションに変更 */
+            background: linear-gradient(to right, #fff200 0%, #76ca15 100%);
+            /* 👇【変更箇所】文字色を白色に変更 */
+            color: #ffffff !important;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            font-size: 1.05rem !important;
+            padding: 10px 24px !important;
+            border-radius: 50px;
+            /* 白文字が見えにくくならないよう、視認性を上げるための軽い文字影を追加 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ================= 💡 ここからPC用のレイアウト ================= */
+        @media (min-width: 992px) {
+            .wrapper-container {
+                display: flex;
+            }
+            /* 左側の固定メニュー */
+            .sidebar-nav {
+                width: 300px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important;
+                border-right: 1px solid #eaeaea;
+                padding: 50px 35px;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            /* 右側のメイン中身エリア */
+            .main-content-area {
+                margin-left: 300px;
+                flex: 1;
+                min-width: 0;
+            }
+            /* PCの時はスマホ用のハンバーガーボタンと上部バーを隠す */
+            .mobile-header-bar {
+                display: none;
+            }
+        }
+
+        /* ================= 💡 ここからスマホ用のレイアウト ================= */
+        @media (max-width: 991.98px) {
+            .sidebar-nav {
+                display: none;
+            }
+            .main-content-area {
+                margin-left: 0;
+            }
+            /* スマホ用の上部固定バー */
+            .mobile-header-bar {
+                position: sticky;
+                top: 0;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(5px);
+                padding: 15px 20px;
+                z-index: 1030;
+                border-bottom: 1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        /* メニュー内リンクの見た目調整 */
+        .sidebar-nav .nav-link, .offcanvas-body .nav-link {
+            color: #555555 !important;
+            padding: 15px 0 !important;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
+            transition: color 0.3s, padding-left 0.3s;
+        }
+        .sidebar-nav .nav-link:hover, .offcanvas-body .nav-link:hover {
+            color: #2c4a3e !important;
+            padding-left: 8px !important;
+        }
+
+        /* スマホ用引き出しメニューの背景 */
+        .custom-offcanvas {
+            background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important;
+            width: 280px !important;
+        }
+        
+        /* ハンバーガーボタン（3本線） */
+        .hamburger-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #2c4a3e;
+            padding: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-header-bar shadow-sm">
+        <a class="navbar-brand fw-bold" href="#" style="color: #2c4a3e; font-size: 1.2rem;">〇〇ヨーガ教室</a>
+        <button class="hamburger-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+
+    <div class="wrapper-container">
+
+        <aside class="sidebar-nav">
+            <div class="mb-5">
+                <a class="navbar-brand fw-bold" href="#" style="font-size: 1.4rem; color: #2c4a3e; letter-spacing: 0.05em;">〇〇ヨーガ教室</a>
+            </div>
+            <nav class="nav flex-column">
+                <a class="nav-link" href="#concept">初めての方へ</a>
+                <a class="nav-link" href="#profile">講師紹介</a>
+                <a class="nav-link" href="#voices">お客様の声</a>
+                <a class="nav-link" href="#faq">Q&A</a>
+                <a class="nav-link" href="#price">スケジュール・料金</a>
+                <a class="nav-link" href="#contact">ご予約</a>
+            </nav>
+        </aside>
+
+        <div class="offcanvas offcanvas-start custom-offcanvas" tabindex="-1" id="mobileMenu">
+            <div class="offcanvas-header justify-content-between pt-4 px-4">
+                <span class="fw-bold" style="color: #2c4a3e;">MENU</span>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" style="font-size: 1.1rem;"></button>
+            </div>
+            <div class="offcanvas-body px-4 pt-3">
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#concept" data-bs-dismiss="offcanvas">初めての方へ</a>
+                    <a class="nav-link" href="#profile" data-bs-dismiss="offcanvas">講師紹介</a>
+                    <a class="nav-link" href="#voices" data-bs-dismiss="offcanvas">お客様の声</a>
+                    <a class="nav-link" href="#faq" data-bs-dismiss="offcanvas">Q&A</a>
+                    <a class="nav-link" href="#price" data-bs-dismiss="offcanvas">スケジュール・料金</a>
+                    <a class="nav-link" href="#contact" data-bs-dismiss="offcanvas">ご予約</a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="main-content-area">
+
+            <header class="py-5 bg-light-green position-relative overflow-hidden" style="border-radius: 0 0 50px 50px;">
+                <div class="container py-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 text-start">
+                            <span class="badge-gradient mb-4">オンラインヨガ</span>
+                            <h1 class="display-5 fw-bold lh-base" style="color: #2c4a3e;">毎日がもっと楽しくなる大人のためのヨガ教室</h1>
+                            <p class="lead mt-3 text-muted">ため息を、ふっと深呼吸に変えて。<br>何歳からでも、気軽に心地よいヨガを始めてみませんか?</p>
+                        </div>
+                        <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" 
+                                 alt="ヨガのイメージ" 
+                                 class="img-fluid rounded-4 shadow" 
+                                 style="max-height: 400px; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section id="concept" class="container py-5">
+                <div class="row justify-content-center text-center mb-4">
+                    <div class="col-md-8">
+                        <h2 class="gradient-heading-en">Concept</h2>
+                        <!-- 🛠️「初めての方へ」を削除しました -->
+                        <p class="lead mt-3" style="line-height: 2;">
+                            「健康な体を維持したい」「日々の生活や仕事に少し疲れてしまっている」<br>
+                            そんなあなたのための、無理なく続けられるオンラインヨガです。<br>
+                            持病がある方や、体が硬くて動きにくいと感じている方も、安心してご参加ください。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-md-4">
+                        <div class="h-100 p-4 text-center border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6; transition: transform 0.3s;">
+                            <div class="mb-3 d-inline-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm" style="width: 70px; height: 70px;">
+                                <i class="bi bi-heart-pulse-fill text-success" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3" style="color: #2c4a3e;">難しいポーズは一切なし</h3>
+                            <p class="text-muted small lh-lg mb-0">体が硬くても、動きにくさを感じていても大丈夫。講師の丁寧な言葉のガイドに身をまかせ、簡単な動作で心地よく体を動かしていきます。周りと比べる必要はありません。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 p-4 text-center border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6; transition: transform 0.3s;">
+                            <div class="mb-3 d-inline-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm" style="width: 70px; height: 70px;">
+                                <i class="bi bi-cloud-moon-fill text-success" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3" style="color: #2c4a3e;">極上のリラクゼーション</h3>
+                            <p class="text-muted small lh-lg mb-0">仕事や生活で張り詰めた心と体をじんわり緩めます。レッスン中、あまりの心地よさに「いつの間にか眠ってしまっていた」という生徒さんもいるほどの、深い癒やしの時間です。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 p-4 text-center border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6; transition: transform 0.3s;">
+                            <div class="mb-3 d-inline-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm" style="width: 70px; height: 70px;">
+                                <i class="bi bi-cup-hot-fill text-success" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3" style="color: #2c4a3e;">平日の午後にホッと一息</h3>
+                            <p class="text-muted small lh-lg mb-0">レッスンは平日の午後に開催。家事の合間や、お仕事の休憩、少し時間にゆとりがある時間帯に、お茶を飲むような感覚で気軽に心と体をリフレッシュしに来てください。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="profile" class="bg-light-green py-5">
+                <div class="container py-4">
+                    <div class="row justify-content-center text-center mb-5">
+                        <div class="col-md-8">
+                            <h2 class="gradient-heading-en">Instructor</h2>
+                            <!-- 🛠️「講師紹介」を削除しました -->
+                        </div>
+                    </div>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-4 text-center mb-4 mb-md-0">
+                            <div class="position-relative d-inline-block">
+                                <img src="images/yoga1.JPG" alt="講師のプロフィール写真"
+                                     class="img-fluid rounded-circle shadow-sm border border-4 border-white" 
+                                     style="width: 250px; height: 250px; object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-start ps-md-5">
+                            <h3 class="h4 fw-bold mb-3" style="color: #2c4a3e; letter-spacing: 0.05em;">赤木 美恵子</h3>
+                            <p class="text-muted mb-4" style="font-size: 0.9rem; letter-spacing: 0.1em;">ヨガインストラクター</p>
+                            <div class="lh-lg text-secondary" style="font-size: 1rem;">
+                                <p>2020年コロナ禍にヨガに出会い、ヨーガセラピー、アクティブヨガを始めました。<br>
+                                そのときに、自分の身体の心地よさを感じ、母にも教えたいと思い、本格的に勉強を開始。<br>
+                                家族や友人知人に教えながら、2022年にヨーガ教師の資格を取得。<br>
+                                2025年にヨーガ療法士の資格を取得し、もっとたくさんの人にヨガのよさ、楽しさを伝えたい、<br>
+                               心身ともに健康になっていく人を増やしたいと考えています。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="voices" class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h2 class="fw-bold mb-4">お客様の声・実績</h2>
+                        <div class="card my-3 p-3 text-start">
+                            <h5>「気持ちよくていつのまにか眠っていました！」（30代女性）</h5>
+                            <p class="mb-0">途中で寝てしまっても構いません。生徒さんのペースに合わせて、心身ともにリラックスしましょう。</p>
+                        </div>
+                        <div class="card my-3 p-3 text-start">
+                            <h5>「お家でできるので気が楽です。」（40代女性）</h5>
+                            <p class="mb-0">自宅をいちばんの心安らぐスタジオにしましょう。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" class="bg-light-green">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold text-center mb-4">よくある質問</h2>
+                            <div class="mb-3">
+                                <strong>Q. ヨガをするのに必要なものを教えてください。</strong>
+                                <p>A. ヨガマット（バスタオル）、動きやすい服装をご準備ください。</p>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Q. カメラはオフ（画面非表示）でも参加できますか？</strong>
+                                <p>A. はい、可能です！「部屋を見せたくない」「スッピンだから恥ずかしい」という日は遠慮なくオフのままご参加ください。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="price" class="container py-5">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h2 class="gradient-heading-en">Schedule & Price</h2>
+                        <!-- 🛠️「スケジュール・料金」を削除しました -->
+                        
+                        <h3 class="h4 fw-bold mb-3 mt-5" style="color: #2c4a3e;">
+                            <i class="bi bi-calendar-event-fill me-2 text-success"></i>レッスンスケジュール
+                        </h3>
+                        <p class="text-muted mb-4">毎週火曜日：13:30～14:45</p>
+                        
+                        <div class="mb-5 p-3 bg-white rounded-4 shadow-sm border d-inline-block">
+                            <img src="images/yoga.july.jpg" 
+                                 alt="yoga.july.jpg" 
+                                 class="img-fluid rounded-3" 
+                                 style="max-width: 500px; width: 100%; height: auto;">
+                        </div>
+                        
+                        <h3 class="h4 fw-bold mb-4 mt-2" style="color: #2c4a3e;">
+                            <i class="bi bi-currency-yen me-1 text-success"></i>料金プラン
+                        </h3>
+                        
+                        <div class="row justify-content-center g-4">
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light-green rounded-4 text-start shadow-sm h-100" style="border: 1px solid #e2e8e2;">
+                                    <h4 class="h5 fw-bold mb-4 text-center" style="color: #2c4a3e; border-bottom: 2px solid #2c4a3e; padding-bottom: 8px;">
+                                        グループレッスン
+                                    </h4>
+                                    <ul class="list-unstyled mb-0 lh-lg" style="font-size: 1.05rem; color: #444;">
+                                        <li class="mb-3 border-bottom pb-2 d-flex justify-content-between align-items-center">
+                                            <span><span class="badge me-2" style="background-color: #d97736; color: white;">おすすめ</span><strong>体験レッスン（1回）</strong></span>
+                                            <span class="text-success fw-bold" style="font-size: 1.2rem;">500円</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span><strong>月4回コース</strong></span>
+                                            <span class="fw-bold" style="font-size: 1.2rem;">3,000円</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 bg-white rounded-4 text-start shadow-sm h-100" style="border: 1px solid #dee2e6;">
+                                    <h4 class="h5 fw-bold mb-4 text-center" style="color: #444; border-bottom: 2px solid #ced4da; padding-bottom: 8px;">
+                                        個人レッスン
+                                    </h4>
+                                    <ul class="list-unstyled mb-0 lh-lg" style="font-size: 1.05rem; color: #444;">
+                                        <li class="mb-3 border-bottom pb-2 d-flex justify-content-between align-items-center">
+                                            <span><strong>初回体験（60分）</strong></span>
+                                            <span class="text-success fw-bold" style="font-size: 1.2rem;">1000円</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span><strong>通常 1回（75分）</strong></span>
+                                            <span class="fw-bold" style="font-size: 1.2rem;">3,000円〜</span>
+                                        </li>
+                                    </ul>
+                                    <p class="text-muted small mt-3 mb-0 lh-base">
+                                        ※体験レッスンの時間や料金（上記はサンプルです）は実際のプランに合わせて変更してください。<br>
+                                        日時はご都合に合わせて柔軟に調整可能です。じっくり自分のペースで進めたい方におすすめです。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="text-center bg-light-green">
+                <div class="container py-4">
+                    <h2 class="fw-bold mb-3">ご予約・お問い合わせ</h2>
+                    <p class="mb-4">ご予約やご質問は、公式LINEから24時間いつでもお気軽にご連絡ください！</p>
+                    <a href="https://lin.ee/xxxxxxx" target="_blank" class="btn btn-line btn-lg px-5 py-3 shadow">
+                        LINEで友だち追加して予約する
+                    </a>
+                </div>
+            </section>
+
+            <footer class="text-center py-4 bg-dark text-white">
+                <p class="mb-0">&copy; 2026 ヨガ教室名. All Rights Reserved.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
