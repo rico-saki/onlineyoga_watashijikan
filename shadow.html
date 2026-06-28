@@ -21,29 +21,31 @@
         .btn-line:hover { background-color: #05b04b; color: white; }
         h1, h2, h3 { letter-spacing: 0.12em; }
 
-        /* 🎨 【変更・調整】画像の上に文字を重ねるためのコンテナ設定 */
+        /* 🎨 画像の上に文字を重ねるためのコンテナ設定 */
         .top-hero-container {
             position: relative;
             width: 100%;
             overflow: hidden;
         }
 
+        /* 🎨 画像のフェードイン設定 */
         .top-full-img {
             width: 100%;
-            height: 60vh; /* 画面の高さの60%分に設定（お好みで調整してください） */
+            height: 60vh;
             min-height: 400px;
             object-fit: cover;
             display: block;
+            animation: fadeInImage 3.5s ease-out forwards;
         }
 
-        /* 🎨 画像の上に重なる白文字のスタイル */
+        /* 🎨 テキストオーバーレイ（位置固定） */
         .hero-text-overlay {
             position: absolute;
             top: 50%;
             left: 10%;
             transform: translateY(-50%);
             color: #ffffff !important;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); /* 写真の上でもくっきり見えるように影を調整 */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
             z-index: 10;
             max-width: 80%;
         }
@@ -59,6 +61,23 @@
             font-size: 1.25rem;
             opacity: 0.95;
             line-height: 1.8;
+        }
+
+        /* 🎬 1文字ずつじんわり浮き出させるためのCSSクラス */
+        .char {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInChar 1.0s ease-out forwards;
+        }
+
+        @keyframes fadeInChar {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInImage {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         /* 🎨 英語見出し用のグラデーション＆手書きフォント設定 */
@@ -82,96 +101,39 @@
 
         /* ================= 💡 ここからPC用のレイアウト ================= */
         @media (min-width: 992px) {
-            .wrapper-container {
-                display: flex;
-            }
-            /* 左側の固定メニュー */
+            .wrapper-container { display: flex; }
             .sidebar-nav {
-                width: 300px;
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100vh;
+                width: 300px; position: fixed; top: 0; left: 0; height: 100vh;
                 background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important;
-                border-right: 1px solid #eaeaea;
-                padding: 50px 35px;
-                z-index: 1000;
-                overflow-y: auto;
+                border-right: 1px solid #eaeaea; padding: 50px 35px; z-index: 1000; overflow-y: auto;
             }
-            /* 右側のメイン中身エリア */
-            .main-content-area {
-                margin-left: 300px;
-                flex: 1;
-                min-width: 0;
-            }
-            /* PCの時はスマホ用のハンバーガーボタンと上部バーを隠す */
-            .mobile-header-bar {
-                display: none;
-            }
+            .main-content-area { margin-left: 300px; flex: 1; min-width: 0; }
+            .mobile-header-bar { display: none; }
         }
 
         /* ================= 💡 ここからスマホ用のレイアウト ================= */
         @media (max-width: 991.98px) {
-            .sidebar-nav {
-                display: none;
-            }
-            .main-content-area {
-                margin-left: 0;
-            }
-            /* スマホ用の上部固定バー */
+            .sidebar-nav { display: none; }
+            .main-content-area { margin-left: 0; }
             .mobile-header-bar {
-                position: sticky;
-                top: 0;
-                background-color: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(5px);
-                padding: 15px 20px;
-                z-index: 1030;
-                border-bottom: 1px solid #eee;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                position: sticky; top: 0; background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(5px); padding: 15px 20px; z-index: 1030; border-bottom: 1px solid #eee;
+                display: flex; justify-content: space-between; align-items: center;
             }
-            /* スマホ時の文字サイズ微調整 */
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            .hero-lead {
-                font-size: 1rem;
-            }
-            .hero-text-overlay {
-                left: 5%;
-                max-width: 90%;
-            }
+            .hero-title { font-size: 1.8rem; }
+            .hero-lead { font-size: 1rem; }
+            .hero-text-overlay { left: 5%; max-width: 90%; }
         }
 
-        /* メニュー内リンクの見た目調整 */
         .sidebar-nav .nav-link, .offcanvas-body .nav-link {
-            color: #555555 !important;
-            padding: 15px 0 !important;
-            font-size: 1.05rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
-            transition: color 0.3s, padding-left 0.3s;
+            color: #555555 !important; padding: 15px 0 !important; font-size: 1.05rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05); transition: color 0.3s, padding-left 0.3s;
         }
         .sidebar-nav .nav-link:hover, .offcanvas-body .nav-link:hover {
-            color: #2c4a3e !important;
-            padding-left: 8px !important;
+            color: #2c4a3e !important; padding-left: 8px !important;
         }
-
-        /* スマホ用引き出しメニューの背景 */
-        .custom-offcanvas {
-            background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important;
-            width: 280px !important;
-        }
-        
-        /* ハンバーガーボタン（3本線） */
-        .hamburger-btn {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: #2c4a3e;
-            padding: 0;
-            cursor: pointer;
-        }
+        .custom-offcanvas { background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important; width: 280px !important; }
+        .hamburger-btn { background: none; border: none; font-size: 1.8rem; color: #2c4a3e; padding: 0; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -218,16 +180,13 @@
 
         <main class="main-content-area">
 
-            <!-- 🛠️ 【変更箇所】メイン画像をコンテナで囲み、上に白文字テキストを配置 -->
             <div class="top-hero-container">
                 <img src="images/pola.jpeg" alt="pola" class="top-full-img">
                 <div class="hero-text-overlay">
-                    <h1 class="hero-title">毎日がもっと楽しくなる大人のためのヨガ〇〇</h1>
-                    <p class="hero-lead">ため息を、ふっと深呼吸に変えて。<br>何歳からでも、気軽に心地よいヨガを始めてみませんか?</p>
+                    <h1 class="hero-title" id="animate-title">毎日がもっと楽しくなる大人のためのヨガ〇〇</h1>
+                    <p class="hero-lead" id="animate-lead">ため息を、ふっと深呼吸に変えて。<br>何歳からでも、気軽に心地よいヨガを始めてみませんか?</p>
                 </div>
             </div>
-
-            <!-- 元の重なったデザインのヘッダーは削除し、直接Conceptセクションへ繋げました -->
 
             <section id="concept" class="container py-5">
                 <div class="row justify-content-center text-center mb-4">
@@ -248,7 +207,7 @@
                                 <i class="bi bi-heart-pulse-fill text-success" style="font-size: 2rem;"></i>
                             </div>
                             <h3 class="h5 fw-bold mb-3" style="color: #2c4a3e;">難しいポーズは一切なし</h3>
-                            <p class="text-muted small lh-lg mb-0">体が硬くても、動きにくさを感じていても大丈夫。講師の丁寧な言葉のガイドに身をまかせ、簡単な動作で心地よく体を動かしていきます。周りと比べる必要はありません。</p>
+                            <p class="text-muted small lh-lg mb-0">体が硬くても、動きにくさを感じていても大丈夫。講師の丁寧な言葉のガイドに身まかせ、簡単な動作で心地よく体を動かしていきます。周りと比べる必要はありません。</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -419,5 +378,64 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1文字ずつに分解してアニメーションを適用する関数
+            function animateText(elementId, baseDelay) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+                
+                const text = element.innerHTML;
+                element.innerHTML = ""; // 一旦中身を空にする
+                
+                // <br>タグなどを保持しつつ、文字だけ分解するための配列化
+                let charArray = [];
+                let isTag = false;
+                let currentTag = "";
+                
+                for (let i = 0; i < text.length; i++) {
+                    if (text[i] === "<") {
+                        isTag = true;
+                        currentTag += text[i];
+                    } else if (text[i] === ">") {
+                        isTag = false;
+                        currentTag += text[i];
+                        charArray.push({ type: "tag", content: currentTag });
+                        currentTag = "";
+                    } else if (isTag) {
+                        currentTag += text[i];
+                    } else {
+                        charArray.push({ type: "char", content: text[i] });
+                    }
+                }
+
+                // 分解した要素を画面に再配置し、遅延（delay）をかけていく
+                let charCount = 0;
+                charArray.forEach(item => {
+                    if (item.type === "tag") {
+                        element.insertAdjacentHTML('beforeend', item.content);
+                    } else {
+                        // 空白文字はそのまま、通常の文字はspanタグで囲む
+                        if (item.content.trim() === "") {
+                            element.insertAdjacentHTML('beforeend', item.content);
+                        } else {
+                            // 1文字あたり0.06秒ずつずらして表示
+                            const delay = baseDelay + (charCount * 0.15);
+                            const span = `<span class="char" style="animation-delay: ${delay}s;">${item.content}</span>`;
+                            element.insertAdjacentHTML('beforeend', span);
+                            charCount++;
+                        }
+                    }
+                });
+            }
+
+            // タイトルの実行（画像表示が始まってから 0.6秒後に開始）
+            animateText("animate-title", 2.0);
+            
+            // 下のサブ文章の実行（タイトルが読み終わる頃、1.8秒後に開始）
+            animateText("animate-lead", 5.0);
+        });
+    </script>
 </body>
 </html>
