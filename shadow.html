@@ -35,7 +35,7 @@
             min-height: 400px;
             object-fit: cover;
             display: block;
-            animation: fadeInImage 3.5s ease-out forwards;
+            animation: fadeInImage 4.5s ease-out forwards;
         }
 
         /* 🎨 テキストオーバーレイ（位置固定） */
@@ -57,17 +57,26 @@
             margin-bottom: 20px;
         }
 
+        /* 🎨 【変更】サブ文章全体を同時にフェードインさせる設定 */
         .hero-lead {
             font-size: 1.25rem;
-            opacity: 0.95;
             line-height: 1.8;
+            opacity: 0; /* 最初は非表示 */
+            /* タイトルが読み終わる5秒後から、1.5秒かけて同時にじんわり表示 */
+            animation: fadeInLead 1.5s ease-out 5.0s forwards;
+        }
+        
+        /* 🎬 サブ文章用のフェードインアニメーション */
+        @keyframes fadeInLead {
+            0% { opacity: 0; }
+            100% { opacity: 0.95; }
         }
 
-        /* 🎬 1文字ずつじんわり浮き出させるためのCSSクラス */
+        /* 🎬 1文字ずつじんわり浮き出させるためのCSSクラス（タイトル用） */
         .char {
             display: inline-block;
             opacity: 0;
-            animation: fadeInChar 1.0s ease-out forwards;
+            animation: fadeInChar 1.2s ease-out forwards;
         }
 
         @keyframes fadeInChar {
@@ -298,10 +307,10 @@
             <section id="price" class="container py-5">
                 <div class="row justify-content-center text-center">
                     <div class="col-md-8">
-                        <h2 class="gradient-heading-en">Schedule & Price</h2>
+                        <h2 class="gradient-heading-en">Lesson</h2>
                         
                         <h3 class="h4 fw-bold mb-3 mt-5" style="color: #2c4a3e;">
-                            <i class="bi bi-calendar-event-fill me-2 text-success"></i>レッスンスケジュール
+                            <i class="bi bi-calendar-event-fill me-2 text-success"></i>スケジュール
                         </h3>
                         <p class="text-muted mb-4">毎週火曜日：13:30～14:45</p>
                         
@@ -420,8 +429,8 @@
                         if (item.content.trim() === "") {
                             element.insertAdjacentHTML('beforeend', item.content);
                         } else {
-                            // 1文字あたり0.06秒ずつずらして表示
-                            const delay = baseDelay + (charCount * 0.15);
+                            // 1文字あたり0.12秒ずつずらして表示
+                            const delay = baseDelay + (charCount * 0.12);
                             const span = `<span class="char" style="animation-delay: ${delay}s;">${item.content}</span>`;
                             element.insertAdjacentHTML('beforeend', span);
                             charCount++;
@@ -430,11 +439,10 @@
                 });
             }
 
-            // タイトルの実行（画像表示が始まってから 0.6秒後に開始）
-            animateText("animate-title", 2.0);
+            // タイトルの実行（画像表示が始まってから 1.5秒後に開始）
+            animateText("animate-title", 1.5);
             
-            // 下のサブ文章の実行（タイトルが読み終わる頃、1.8秒後に開始）
-            animateText("animate-lead", 5.0);
+            // 💡 サブ文章（animate-lead）のJavaScript処理は削除し、CSSフェードインのみで同時に表示させます
         });
     </script>
 </body>
