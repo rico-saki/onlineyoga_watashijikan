@@ -159,6 +159,26 @@
         }
         .custom-offcanvas { background: linear-gradient(135deg, #f9fbf4 0%, #edf3db 100%) !important; width: 280px !important; }
         .hamburger-btn { background: none; border: none; font-size: 1.8rem; color: #2c4a3e; padding: 0; cursor: pointer; }
+
+        /* 🎨 アコーディオン用のボタンスタイル調整 */
+        .accordion-trigger-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            width: 100%;
+            text-align: left;
+            outline: none;
+        }
+        .accordion-trigger-btn:focus {
+            box-shadow: none;
+        }
+        /* 開閉時に「▼ 続きを読む」の矢印や文字を切り替える設定 */
+        .read-more-text::before {
+            content: "▼  全文を表示";
+        }
+        .accordion-trigger-btn[aria-expanded="true"] .read-more-text::before {
+            content: "▲  閉じる";
+        }
     </style>
 </head>
 <body>
@@ -216,7 +236,6 @@
             <section id="concept" class="container py-5">
                 <div class="row justify-content-center text-center mb-4">
                     <div class="col-md-8">
-                        <!-- 💡 スマホ時は縦並び、PC時は横並び（下揃え）になるよう調整 -->
                         <div class="d-block d-lg-flex justify-content-lg-center align-items-lg-end section-title-wrap">
                             <h2 class="gradient-heading-en">Concept</h2>
                             <span class="heading-sub-ja">初めての方へ</span>
@@ -309,46 +328,116 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <!-- ① リフレッシュ感・満足感 -->
+                        <!-- ① リフレッシュ感・満足感（常時表示） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">驚きのリラックス効果！いつのまにか眠っていました</h5>
-                            <p class="mb-0 text-muted small lh-lg">「身体のいろいろな部分が心地よく伸びて、本当に気持ちよかったです。レッスン中、あまりの心地よさに気がつけば眠ってしまっていました。」（30代女性）</p>
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2" style="color: #2c4a3e;">驚きのリラックス効果！気づけば眠ってしまう心地よさ</h5>
+                                    <p class="mb-0 text-muted small lh-lg">「身体のあちこちが心地よく伸びて、本当に気持ちよかったです。レッスン中はあまりの心地よさに、いつのまにか眠ってしまっていました。」（40代女性）</p>
+                                </div>
+                            </div>
                         </div>
                         
-                        <!-- ② 姿勢の改善 -->
+                        <!-- ② 姿勢の改善（常時表示） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">姿勢が劇的に変化！腰がスーッと伸びて感動しました</h5>
-                            <p class="mb-0 text-muted small lh-lg">「普段はつい腰が曲がりがちだったのですが、ヨガの後は固まっていた身体がほぐれ、腰がスーッと伸びて気持ちよく真っ直ぐ立つことができました。」（70代女性）</p>
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2" style="color: #2c4a3e;">姿勢が劇的に変化！腰がスーッと伸びて感動</h5>
+                                    <p class="mb-0 text-muted small lh-lg">「普段はつい腰が曲がりがちだったのですが、ヨガの後は固まっていた身体がほぐれ、腰がスーッと伸びて気持ちよく真っ直ぐ立てるようになりました。」（70代女性）</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ③ 手軽さ・継続しやすさ -->
+                        <!-- ③ 手軽さ・継続しやすさ（ここからアコーディオン） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">自宅でできるから、無理なく気軽に続けられます</h5>
-                            <p class="mb-0 text-muted small lh-lg">「わざわざ外出しなくても自宅でレッスンが受けられるので、移動の手間もなく、自分のペースで気軽に楽しく続けられています。」（20代女性）</p>
+                            <button class="accordion-trigger-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoice3" aria-expanded="false" aria-controls="collapseVoice3">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                    <div class="w-100">
+                                        <h5 class="fw-bold mb-1" style="color: #2c4a3e;">自宅で受けられるから、無理なく続けられます</h5>
+                                        <span class="text-success small fw-bold read-more-text"></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="collapse" id="collapseVoice3">
+                                <div class="pt-3 ps-5">
+                                    <p class="mb-0 text-muted small lh-lg">「外出しなくても自宅でレッスンを受けられるので、移動の手間もなく、自分のペースで気軽に楽しく続けられています。」（30代女性）</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ④ 具体的な身体の変化 -->
+                        <!-- ④ 具体的な身体の変化（アコーディオン） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">ヨガの後にびっくり！諦めていた正座ができるように</h5>
-                            <p class="mb-0 text-muted small lh-lg">「これまでは膝や足首が硬くて正座ができなかったのですが、ヨガのレッスンが終わった後には、すんなりできるようになっていて驚きました。」（70代女性）</p>
+                            <button class="accordion-trigger-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoice4" aria-expanded="false" aria-controls="collapseVoice4">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                    <div class="w-100">
+                                        <h5 class="fw-bold mb-1" style="color: #2c4a3e;">ヨガの後にびっくり！諦めていた正座ができるように</h5>
+                                        <span class="text-success small fw-bold read-more-text"></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="collapse" id="collapseVoice4">
+                                <div class="pt-3 ps-5">
+                                    <p class="mb-0 text-muted small lh-lg">「これまでは膝や足首が硬くて正座ができなかったのですが、ヨガのレッスンが終わった後には、すんなり正座ができるようになっていて驚きました。」（70代女性）</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ⑤ 痛みの軽減 -->
+                        <!-- ⑤ 痛みの軽減（アコーディオン） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">辛かった膝の痛みが和らぎ、徐々に歩けるように</h5>
-                            <p class="mb-0 text-muted small lh-lg">「最初は膝が痛くて歩くのも億劫だったのですが、先生に無理のない動きを教わるうちに、徐々にスムーズに歩けるようになってきて嬉しいです。」（80代女性）</p>
+                            <button class="accordion-trigger-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoice5" aria-expanded="false" aria-controls="collapseVoice5">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                    <div class="w-100">
+                                        <h5 class="fw-bold mb-1" style="color: #2c4a3e;">辛かった膝の痛みが和らぎ、少しずつ歩けるように</h5>
+                                        <span class="text-success small fw-bold read-more-text"></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="collapse" id="collapseVoice5">
+                                <div class="pt-3 ps-5">
+                                    <p class="mb-0 text-muted small lh-lg">「最初は膝が痛くて歩くのも億劫でしたが、先生に無理のない動きを教わるうちに、徐々にスムーズに歩けるようになり、とても嬉しいです。」（80代女性）</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ⑥ 不調の改善 -->
+                        <!-- ⑥ 不調の改善（アコーディオン） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">呼吸法を取り入れてから、夜ぐっすり眠れるようになりました</h5>
-                            <p class="mb-0 text-muted small lh-lg">「レッスンで丁寧な呼吸法を教わるようになってから、ガチガチだった心と身体がリラックスし、夜もスムーズに深く眠れるようになりました。」（60代女性）</p>
+                            <button class="accordion-trigger-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoice6" aria-expanded="false" aria-controls="collapseVoice6">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                    <div class="w-100">
+                                        <h5 class="fw-bold mb-1" style="color: #2c4a3e;">呼吸法を取り入れてから、夜ぐっすり眠れるようになりました</h5>
+                                        <span class="text-success small fw-bold read-more-text"></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="collapse" id="collapseVoice6">
+                                <div class="pt-3 ps-5">
+                                    <p class="mb-0 text-muted small lh-lg">「レッスンで丁寧な呼吸法を教わるようになってから、ガチガチだった心と身体がリラックスし、夜もぐっすり眠れるようになりました。」（20代女性）</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ⑦ ユニークな効果 -->
+                        <!-- ⑦ ユニークな効果（アコーディオン） -->
                         <div class="card my-3 p-4 text-start border-0 rounded-4 shadow-sm" style="background-color: #f7f9f6;">
-                            <h5 class="fw-bold" style="color: #2c4a3e;">目の疲れがすっきり！視界がくっきりとクリアに</h5>
-                            <p class="mb-0 text-muted small lh-lg">「珍しい『眼球のヨガ』を体験したのですが、パソコンやスマホで疲れていた目がとても楽になり、周りの景色が驚くほどくッキリ見えるようになりました。」（70代女性）</p>
+                            <button class="accordion-trigger-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoice7" aria-expanded="false" aria-controls="collapseVoice7">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-person-circle text-success me-3" style="font-size: 2.2rem; line-height: 1; flex-shrink: 0;"></i>
+                                    <div class="w-100">
+                                        <h5 class="fw-bold mb-1" style="color: #2c4a3e;">目の疲れがすっきり！視界がくっきりクリアに</h5>
+                                        <span class="text-success small fw-bold read-more-text"></span>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="collapse" id="collapseVoice7">
+                                <div class="pt-3 ps-5">
+                                    <p class="mb-0 text-muted small lh-lg">「珍しい『眼球のヨガ』を体験しました。スマホなどで疲れていた目がとても楽になり、周りの景色が驚くほどくっきり見えるようになりました。」（70代女性）</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
