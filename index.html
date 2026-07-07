@@ -681,8 +681,52 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // スマホメニュー（Offcanvas）の要素を取得
+            const mobileMenuEl = document.getElementById('mobileMenu');
+            if (!mobileMenuEl) return;
+
+            // BootstrapのOffcanvasインスタンスを取得または作成
+            const oCanvas = bootstrap.Offcanvas.getOrCreateInstance(mobileMenuEl);
+
+            // スマホメニュー内のすべてのリンク（#から始まるアンカーリンク）を取得
+            const menuLinks = mobileMenuEl.querySelectorAll('a[href^="#"]');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // 通常のリンク移動を一度ストップ
+                    e.preventDefault();
+
+                    // 移動先のターゲット（例: #faq）を取得
+                    const targetId = this.getAttribute('href');
+                    const targetEl = document.querySelector(targetId);
+
+                    if (targetEl) {
+                        // 1. まずスマホメニューを閉じる
+                        oCanvas.hide();
+
+                        // 2. メニューが完全に閉じ終わった（アニメーション終了）直後にスクロールさせる
+                        mobileMenuEl.addEventListener('hidden.bs.offcanvas', function onHidden() {
+                            // ヘッダーバー（stickyナビ）の高さ分、上に余白を作る（必要に応じて調整）
+                            const headerOffset = 70; 
+                            const elementPosition = targetEl.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            // スル〜と滑らかに目的地へ移動
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+
+                            // イベントが何度も登録されないように一度だけ実行して削除
+                            mobileMenuEl.removeEventListener('hidden.bs.offcanvas', onHidden);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
