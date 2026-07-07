@@ -512,12 +512,22 @@
                         </h3>
                         <p class="text-muted mb-4">火曜日：13:30～14:45　金曜日：13:30～14:30</p>
                         
-                        <div class="mb-5 p-3 bg-white rounded-4 shadow-sm border d-inline-block">
-                            <img src="images/yoga.july.jpg" 
-                                 alt="yoga.july.jpg" 
-                                 class="img-fluid rounded-3" 
-                                 style="max-width: 500px; width: 100%; height: auto;">
+                        <div class="d-flex flex-column flex-md-row gap-3">
+                        <div class="p-3 bg-white rounded-4 shadow-sm border">
+                        <img src="images/yoga.july.jpg"
+                             alt="7月カレンダー"
+                             class="img-fluid rounded-3"
+                             style="max-width: 500px; width: 100%; height: auto;">
                         </div>
+
+                        <div class="p-3 bg-white rounded-4 shadow-sm border">
+                        <img src="images/yoga.august.png"
+                             alt="8月カレンダー"
+                             class="img-fluid rounded-3"
+                             style="max-width: 500px; width: 100%; height: auto;">
+                        </div>
+                    </div>
+    
 
         <!-- 料金プランセクション（メインコンテンツエリアの横幅いっぱいに広げる正しい構造） -->
                         <div id="price" class="pt-5 mt-5" style="margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); background-color: #f8f9fa;">
@@ -553,6 +563,7 @@
                                                         <span class="fw-bold text-secondary" style="font-size: 0.9rem;">火・金フリープラン</span><br>
                                                         <span class="h3 fw-bold text-dark">3,000</span>
                                                         <span class="text-muted" style="font-size: 0.85rem;">円 / 月6回</span><br>
+                                                        <div class="plan-item"></div>
                                                         <span class="fw-bold text-secondary" style="font-size: 0.9rem;">火曜日プラン</span><br>
                                                         <span class="h3 fw-bold text-dark">2,000</span>
                                                         <span class="text-muted" style="font-size: 0.85rem;">円 / 月3回</span><br>
@@ -637,16 +648,10 @@
                     </div> <!-- カレンダーを囲んでいたcol-md-8の終わり -->
                 </div> <!-- カレンダーを囲んでいたrowの終わり -->
             </section> <!-- Lessonセクションの終わり -->
-
-        </main>
-    </div>
-
     <!-- BootstrapのJavaScript読み込み -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-            <section id="contact" class="text-center bg-light-green">
-                <div class="container py-4">
+
+            <section id="contact" class="bg-light-green w-100">
+                <div class="container py-5 text-center">
                     <h2 class="fw-bold mb-3">ご予約・お問い合わせ</h2>
                     <p class="mb-4">ご予約やご質問は、公式LINEから24時間いつでもお気軽にご連絡ください！</p>
                     <a href="https://lin.ee/xxxxxxx" target="_blank" class="btn btn-line btn-lg px-5 py-3 shadow">
@@ -655,7 +660,7 @@
                 </div>
             </section>
 
-            <footer class="text-center py-4 bg-dark text-white">
+            <footer class="text-center py-4 bg-dark text-white w-100">
                 <p class="mb-0">&copy; 2026 オンラインヨガ〇〇. All Rights Reserved.</p>
             </footer>
 
@@ -663,6 +668,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
