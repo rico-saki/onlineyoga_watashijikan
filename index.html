@@ -139,6 +139,14 @@
             .hero-title { font-size: 1.8rem; }
             .hero-lead { font-size: 1rem; }
             .hero-text-overlay { left: 5%; max-width: 90%; }
+
+            /* 👑 ここから追加：スマホメニューが閉じるバグの修正 👑 */
+            .offcanvas-backdrop.fade {
+                transition: opacity 0.15s linear !important; /* 影が消える時間を最速にする */
+            }
+            .offcanvas.collapsing {
+                transition: transform 0.15s ease-in-out !important; /* メニュー自体が引っ込む時間を最速にする */
+            }
             
             /* スマホ時は完全に中央揃えで縦並びにする */
             .heading-sub-ja {
