@@ -193,7 +193,7 @@
                 backdrop-filter: blur(5px); padding: 15px 20px; z-index: 1030; border-bottom: 1px solid #eee;
                 display: flex; justify-content: space-between; align-items: center;
             }
-            .hero-title { font-size: 2.5rem !important;}
+            .hero-title { font-size: 2rem !important;}
             .hero-lead { font-size: 1rem; }
             .hero-text-overlay { left: 5%; max-width: 90%; }
 
@@ -846,7 +846,7 @@
                         if (item.content.trim() === "") {
                             element.insertAdjacentHTML('beforeend', item.content);
                         } else {
-                            const delay = baseDelay + (charCount * 0.22);
+                            const delay = baseDelay + (charCount * 0.23);
                             const span = `<span class="char" style="animation-delay: ${delay}s;">${item.content}</span>`;
                             element.insertAdjacentHTML('beforeend', span);
                             charCount++;
