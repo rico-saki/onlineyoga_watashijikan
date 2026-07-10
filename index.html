@@ -264,6 +264,37 @@
 .accordion-trigger-btn:not(.collapsed)[aria-expanded="true"] .read-more-text::before {
     content: "▲   閉じる" !important;
 }
+/* 📱 スマホでは一切邪魔をせず、💻 PC（画面幅992px以上）のときだけ右側に固定する設定 */
+@media (min-width: 992px) {
+    /* QRコードを乗せる外枠の箱 */
+    .contact-qr-wrapper {
+        position: absolute;
+        top: 50%;
+        right: 8%; /* 💡 右端からの距離（内側に寄せたい時は 10% などに増やす） */
+        transform: translateY(-50%); /* 縦方向の真ん中に合わせる */
+        text-align: center;
+        background-color: #ffffff; /* QRコードの後ろを白背景にして見やすく */
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* 優しい影 */
+    }
+
+    /* QRコードの画像自体のサイズ */
+    .contact-qr-img {
+        width: 140px;  /* 💡 画像の横幅（大きめにしたい場合は 160px などに調整） */
+        height: 140px; /* 💡 画像の縦幅 */
+        object-fit: contain;
+        margin-bottom: 8px;
+    }
+
+    /* QRコードの下の添え字 */
+    .contact-qr-text {
+        font-size: 0.8rem;
+        color: #666666;
+        margin: 0;
+        font-family: "Shippori Mincho", serif;
+    }
+}
     </style>
 </head>
 <body>
@@ -650,7 +681,7 @@
                                                 
                                                 <div class="mb-4 py-3 bg-light rounded-3 d-flex flex-column justify-content-center align-items-center" style="min-height: 250px;">
                                                     <div class="mb-1">
-                                                        <span class="badge bg-danger text-white px-2 py-1 rounded-pill mb-1" style="font-size: 0.75rem;">初回体験</span><br>
+                                                        <span class="badge text-white px-2 py-1 rounded-pill mb-1" style="font-size: 0.75rem; background-color: #d37b51 !important;">初回体験</span><br>
                                                         <span class="h3 fw-bold text-dark">500</span>
                                                         <span class="text-muted" style="font-size: 0.85rem;">円 / 1回</span>
                                                     </div>
@@ -689,7 +720,8 @@
                                                 
                                                 <div class="mb-4 py-3 bg-light rounded-3 d-flex flex-column justify-content-center align-items-center" style="min-height: 250px;">
                                                     <div class="mb-1">
-                                                        <span class="badge bg-danger text-white px-2 py-1 rounded-pill mb-1" style="font-size: 0.75rem;">初回体験</span><br>
+                                                        <span class="badge text-white px-2 py-1 rounded-pill mb-1" style="font-size: 0.75rem; background-color: #d37b51 !important;">おすすめ</span>
+                                                        <span class="badge text-white px-2 py-1 rounded-pill mb-1" style="font-size: 0.75rem; background-color: #d37b51 !important;">初回体験</span><br>
                                                         <span class="h3 fw-bold text-dark">1,000</span>
                                                         <span class="text-muted" style="font-size: 0.85rem;">円 / 1回</span>
                                                     </div>
@@ -744,15 +776,20 @@
             </section> <!-- Lessonセクションの終わり -->
     <!-- BootstrapのJavaScript読み込み -->
 
-            <section id="contact" class="bg-light-green w-100">
-                <div class="container py-5 text-center">
-                    <h2 class="fw-bold mb-3">ご予約・お問い合わせ</h2>
-                    <p class="mb-4">ご予約やご質問は、公式LINEから24時間いつでもお気軽にご連絡ください！</p>
-                    <a href="https://lin.ee/WkzcOmG" target="_blank" class="btn btn-line btn-lg px-5 py-3 shadow">
-                        LINEで友だち追加して予約する
-                    </a>
-                </div>
-            </section>
+            <section id="contact" class="bg-light-green w-100 position-relative" style="overflow: hidden;">
+        <div class="container py-5 text-center">
+        <h2 class="fw-bold mb-3">ご予約・お問い合わせ</h2>
+        <p class="mb-4">ご予約やご質問は、公式LINEから24時間いつでもお気軽にご連絡ください！</p>
+        <a href="https://lin.ee/WkzcOmG" target="_blank" class="btn btn-line btn-lg px-5 py-3 shadow">
+            LINEで友だち追加して予約する
+        </a>
+        
+        <div class="contact-qr-wrapper d-none d-lg-block">
+            <img src="images/yogaQRcode.png" alt="公式LINE QRコード" class="contact-qr-img">
+            <p class="contact-qr-text">QRコードの読み込みもできます</p>
+        </div>
+    </div>
+</section>
 
             <footer class="text-center py-4 bg-dark text-white w-100">
                 <p class="mb-0">&copy; 2026 オンラインヨガわたし時間. All Rights Reserved.</p>
