@@ -53,23 +53,57 @@
        rgba(255, 255, 255, 0.85) の最後の「0.85」が不透明度です。
        背景が暗めなら 0.85、背景が明るめなら 0.9（少し濃いめ）にするのがおすすめです。
     */
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
                   
     
     /* レイアウトの調整 */
     font-size: 3.5rem !important; 
     margin: 0 !important;
+    margin-bottom: 2.5rem !important; /* 下の文章との隙間 */
     padding: 0 !important;
-    display: inline-block !important;
-    line-height: 1.4 !important; 
+    display: block !important;
+    width: 100% !important;
+    line-height: 1.5 !important; 
     letter-spacing: 0.06em !important;
+        }
+        /* 👑 確実に階段状に並べるための最終整理コード */
+        .hero-title .line1,
+        .hero-title .line2,
+        .hero-title .line3 {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .hero-title .char {
+            display: inline-block;
+        }
+
+        /* 💻 パソコン時の各文字のずらし位置 */
+        @media (min-width: 992px) {
+            .hero-title .line2 .char {
+                transform: translateX(6rem); /* 2行目を右に6remずらす */
+            }
+            .hero-title .line3 .char {
+                transform: translateX(14rem); /* 3行目を右に14remずらす */
+            }
+        }
+
+        /* 📱 スマホ時の各文字のずらし位置 */
+        @media (max-width: 991.98px) {
+            .hero-title .line2 .char {
+                transform: translateX(2rem); /* スマホの2行目を右に2remずらす */
+            }
+            .hero-title .line3 .char {
+                transform: translateX(4rem); /* スマホの3行目を右に4remずらす */
+            }
         }
 
         .hero-lead {
             font-size: 1.25rem;
             line-height: 1.8;
             opacity: 0;
-            animation: fadeInLead 1.5s ease-out 5.0s forwards;
+            color: rgba(255, 255, 255, 0.85) !important;
+            animation: fadeInLead 1.5s ease-out 8s forwards;
         }
         
         @keyframes fadeInLead {
@@ -137,6 +171,18 @@
                 margin-left: 18px; 
                 padding-bottom: 14px; 
             }
+            /* 👑 【ここを追加】PC時の階段状レイアウト */
+            .hero-title .line1 {
+                text-align: left !important;
+            }
+            .hero-title .line2 {
+                text-align: left !important;
+                padding-left: 6rem !important; /* 2行目をほどよく右にずらす */
+            }
+            .hero-title .line3 {
+                text-align: left !important;
+                padding-left: 14rem !important; /* 3行目をさらに右にずらす（極端な右寄せを防ぐ） */
+            }
         }
 
         @media (max-width: 991.98px) {
@@ -150,6 +196,21 @@
             .hero-title { font-size: 2.5rem !important;}
             .hero-lead { font-size: 1rem; }
             .hero-text-overlay { left: 5%; max-width: 90%; }
+
+            /* 👑 【ここを上書き・追加】スマホ時のマイルドな階段レイアウト */
+            .hero-title .line1 {
+                text-align: left !important;
+                margin-bottom: 0.5rem !important; /* 1行目が2行に折れた時、次の行とくっつきすぎないように */
+            }
+            .hero-title .line2 {
+                text-align: left !important;
+                padding-left: 2rem !important; /* 2行目を少し右にずらす（中央寄せ風） */
+                margin-bottom: 0.5rem !important;
+            }
+            .hero-title .line3 {
+                text-align: left !important;
+                padding-left: 4rem !important; /* 3行目をさらに少し右にずらす（マイルドな右寄せ風） */
+            }
 
             /* 👑 ここから追加：スマホメニューが閉じるバグの修正 👑 */
             .offcanvas-backdrop.fade {
@@ -258,16 +319,16 @@
             <div class="hero-text-overlay">
             <h1 class="hero-title" id="animate-title">
             <span class="line1">毎日がもっと楽しくなる</span>
-            <span class="line2">大人のための</span>
-            <span class="line3">"わたし時間"</span>
+            <span class="line2">　　　大人のための</span>
+            <span class="line3">　　　　　　"わたし時間"</span>
             </h1>
             <!-- サブテキストのクラス名を hero-lead と仮定します -->
             <p class="hero-lead" id="animate-lead">
-            ため息を、ふっと深呼吸に変えて。<br>
-            何歳からでも、気軽に心地よいヨガを始めてみませんか？
+            　　　　ため息を、ふっと深呼吸に変えて。<br>
+            　　　　何歳からでも、気軽に心地よいヨガを始めてみませんか？
             </p>
             </div></div>
-     
+            
             <section id="concept" class="container py-5">
                 <div class="row justify-content-center text-center mb-4">
                     <div class="col-md-8">
@@ -785,7 +846,7 @@
                         if (item.content.trim() === "") {
                             element.insertAdjacentHTML('beforeend', item.content);
                         } else {
-                            const delay = baseDelay + (charCount * 0.12);
+                            const delay = baseDelay + (charCount * 0.22);
                             const span = `<span class="char" style="animation-delay: ${delay}s;">${item.content}</span>`;
                             element.insertAdjacentHTML('beforeend', span);
                             charCount++;
